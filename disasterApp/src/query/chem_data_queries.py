@@ -35,6 +35,7 @@ def get_sample_chem_data_for_date(year, month, day):
                 continue;
 
             chem_formula = chem_file_name.split(".")[0]
+            print 'Reading ' + chem_formula
 
             url = _get_full_url(ftp, chem_file_name)
             chem_file = urllib2.urlopen(url)
@@ -52,8 +53,8 @@ def get_sample_chem_data_for_date(year, month, day):
             if count != 0 :
                 average = sum/count
                 response_dict[chem_formula] = average
-
-            chem_file.close()
+            else:
+                response_dict[chem_formula] = "Data missing (-999)"
 
         return response_dict
 
