@@ -2,8 +2,9 @@ import ftplib
 import urllib2
 import csv
 
-#Open ftp connection
-ftp = ftplib.FTP('ftp.asc-csa.gc.ca')
+URL_ROOT = 'ftp.asc-csa.gc.ca'
+# Open ftp connection
+ftp = ftplib.FTP(URL_ROOT)
 ftp.login()    
 ftp.cwd('users/OpenData_DonneesOuvertes/pub/SCISAT/Data_format CSV/2010-08')  
 
@@ -18,7 +19,7 @@ for ssDir in ssDirs:
     chemCSVfiles = ftp.nlst()
     for chemCSVfileName in chemCSVfiles:
 
-        url = 'ftp://ftp.asc-csa.gc.ca' + ftp.pwd() + '/' + chemCSVfileName
+        url = 'ftp://' + URL_ROOT + ftp.pwd() + '/' + chemCSVfileName
         print url
         chemCSVfile = urllib2.urlopen(url)
         fileReader = csv.reader(chemCSVfile)
